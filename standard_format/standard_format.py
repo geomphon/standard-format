@@ -33,18 +33,26 @@ def unmunge(keys):
     unmunge = lambda x: x[1:] if (x[0] == '_') else x
     return [unmunge(key) for key in keys]
 
-def munge(keys):
+def munge(x):
     '''
     # FIXME doc
     '''
-    return ['_' + key for key in keys]
+    if x[0] != '_':
+        return '_' + x
+    return x
 
-def munged(data_frame):
+def munge_all(keys):
+    '''
+    # FIXME doc
+    '''
+    return [munge(key) for key in keys]
+
+def munge_df(data_frame):
     '''
     # FIXME doc
     '''
     old_colnames = data_frame.columns.tolist()
-    new_colnames = munge(old_colnames)
+    new_colnames = munge_all(old_colnames)
     return data_frame.rename(columns=dict(zip(old_colnames, new_colnames)))
 
 def format_valid(data_frame):
